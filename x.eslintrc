@@ -21,6 +21,7 @@
     }
   },
   "rules": {
+    "no-unused-vars": 1,
     "comma-dangle": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "max-len": "off",
