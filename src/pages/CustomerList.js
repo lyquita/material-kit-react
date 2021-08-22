@@ -7,14 +7,15 @@ import axios from 'axios';
 
 function CustomerList() {
   const [customers, setCustomers] = useState([]);
+  const [page, setPage] = useState(1);
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios('http://127.0.0.1:8000/course/');
+      const res = await axios(`http://127.0.0.1:8000/course/?page=${page+1}`);
       setCustomers(res);
     };
     fetchData();
-  }, []);
-  console.log('customers', customers);
+  }, [page]);
+  console.log('pageFromChild',page)
   return (
     <>
       <Helmet>
@@ -30,7 +31,7 @@ function CustomerList() {
         <Container maxWidth={false}>
           <CustomerListToolbar />
           <Box sx={{ pt: 3 }}>
-            <CustomerListResults customers={customers} />
+            <CustomerListResults customers={customers} page={page} setPage={setPage}/>
           </Box>
         </Container>
       </Box>

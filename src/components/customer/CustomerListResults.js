@@ -14,20 +14,20 @@ import {
   Typography
 } from '@material-ui/core';
 
-const CustomerListResults = ({ customers, ...rest }) => {
+const CustomerListResults = ({ customers, page,setPage, ...rest }) => {
 const [customerlist, setCustomerlist] = useState([]);
-const counts = customers.headers['content-range'];
+const [counts, setCounts] = useState(10);
 useEffect(() => {
   if(!customers.data){
     setCustomerlist([]);
   }else{
     setCustomerlist(customers.data);
+    setCounts(customers.headers['content-range'])
   }
 }, [customers]);
 
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(0);
 
 
   const handleSelectAll = (event) => {
@@ -76,7 +76,7 @@ useEffect(() => {
 
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
-    console.log('wats in the page?', page )
+    console.log('wats in the event?', newPage )
   };
 
   return (
