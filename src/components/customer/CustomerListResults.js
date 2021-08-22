@@ -15,7 +15,8 @@ import {
 } from '@material-ui/core';
 
 const CustomerListResults = ({ customers, ...rest }) => {
-const [customerlist, setCustomerlist] = useState([])
+const [customerlist, setCustomerlist] = useState([]);
+const counts = customers.headers['content-range'];
 useEffect(() => {
   if(!customers.data){
     setCustomerlist([]);
@@ -27,6 +28,7 @@ useEffect(() => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
+
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
@@ -69,10 +71,12 @@ useEffect(() => {
 
   const handleLimitChange = (event) => {
     setLimit(event.target.value);
+    console.log('limit', limit)
   };
 
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
+    console.log('wats in the page?', page )
   };
 
   return (
@@ -145,19 +149,19 @@ useEffect(() => {
       </PerfectScrollbar>
       <TablePagination
         component="div"
-        count={customers.length}
+        count={counts}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleLimitChange}
         page={page}
         rowsPerPage={limit}
-        rowsPerPageOptions={[5, 10, 25]}
+        rowsPerPageOptions={[10]}
       />
     </Card>
   );
 };
 
 CustomerListResults.propTypes = {
-  customers: PropTypes.array.isRequired
+  customers: PropTypes.object.isRequired
 };
 
 export default CustomerListResults;
