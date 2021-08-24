@@ -20,8 +20,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import { useState, useEffect } from 'react'
-import { count } from 'yargs';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -70,16 +68,11 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'coachname', numeric: false, disablePadding: true, label: 'Coach Name' },
-  { id: 'coursename', numeric: false, disablePadding: false, label: 'Course Name' },
-  { id: 'placeid', numeric: true, disablePadding: false, label: 'Place Id' },
-  { id: 'placename', numeric: false, disablePadding: false, label: 'Place Name' },
-  { id: 'coursedate', numeric: false, disablePadding: false, label: 'Coures Date' },
-  { id: 'starttime', numeric: false, disablePadding: false, label: 'Start Time' },
-  { id: 'endtime', numeric: false, disablePadding: false, label: 'End Time' },
-  { id: 'orderamount', numeric: true, disablePadding: false, label: 'Order Amount' },
-  { id: 'signamount', numeric: true, disablePadding: false, label: 'Sign Amount' },
-  { id: 'fee', numeric: true, disablePadding: false, label: 'Fee' },
+  { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
+  { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
+  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
+  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
+  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
 ];
 
 function EnhancedTableHead(props) {
@@ -220,27 +213,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable({ customers, page, setPage, ...rest }) {
-  const [customerlist, setCustomerlist] = useState([]);
-  const [counts, setCounts] = useState(10);
-
-  useEffect(() => {
-    if (!customers.data) {
-      setCustomerlist([]);
-    } else {
-      setCustomerlist(customers.data);
-      setCounts(customers.headers['content-range']);
-    }
-  }, [customers]);
-
-  console.log('customers', customers)
-  console.log('customerlist', customerlist)
-
+export default function EnhancedTable() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
-  // const [page, setPage] = React.useState(0);
+  const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -314,10 +292,10 @@ export default function EnhancedTable({ customers, page, setPage, ...rest }) {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={customerlist.length}
+              rowCount={rows.length}
             />
             <TableBody>
-              {stableSort(customerlist, getComparator(order, orderBy))
+              {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
@@ -340,17 +318,12 @@ export default function EnhancedTable({ customers, page, setPage, ...rest }) {
                         />
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.coachname}
+                        {row.name}
                       </TableCell>
-                      <TableCell >{row.coursename}</TableCell>
-                      <TableCell >{row.placeid}</TableCell>
-                      <TableCell >{row.placename}</TableCell>
-                      <TableCell >{row.coursedate}</TableCell>
-                      <TableCell >{row.starttime}</TableCell>
-                      <TableCell >{row.endtime}</TableCell>
-                      <TableCell >{row.orderamount}</TableCell>
-                      <TableCell >{row.signamount}</TableCell>
-                      <TableCell >{row.fee}</TableCell>
+                      <TableCell align="right">{row.calories}</TableCell>
+                      <TableCell align="right">{row.fat}</TableCell>
+                      <TableCell align="right">{row.carbs}</TableCell>
+                      <TableCell align="right">{row.protein}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -365,7 +338,7 @@ export default function EnhancedTable({ customers, page, setPage, ...rest }) {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={counts}
+          count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
