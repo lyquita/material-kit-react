@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -222,57 +222,126 @@ export default function EnhancedTable() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
+  const handleSelectAll = (event) => {
+    let newSelectedCustomerIds;
 
-  const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
-      setSelected(newSelecteds);
-      return;
+      newSelectedCustomerIds = customerlist.map((customer) => customer.id);
+    } else {
+      newSelectedCustomerIds = [];
     }
-    setSelected([]);
+
+    setSelectedCustomerIds(newSelectedCustomerIds);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
+  const handleSelectOne = (event, id) => {
+    const selectedIndex = selectedCustomerIds.indexOf(id);
+    let newSelectedCustomerIds = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelectedCustomerIds = newSelectedCustomerIds.concat(
+        selectedCustomerIds,
+        id
+      );
     } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
+      newSelectedCustomerIds = newSelectedCustomerIds.concat(
+        selectedCustomerIds.slice(1)
+      );
+    } else if (selectedIndex === selectedCustomerIds.length - 1) {
+      newSelectedCustomerIds = newSelectedCustomerIds.concat(
+        selectedCustomerIds.slice(0, -1)
+      );
     } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
+      newSelectedCustomerIds = newSelectedCustomerIds.concat(
+        selectedCustomerIds.slice(0, selectedIndex),
+        selectedCustomerIds.slice(selectedIndex + 1)
       );
     }
 
-    setSelected(newSelected);
+    setSelectedCustomerIds(newSelectedCustomerIds);
   };
 
-  const handleChangePage = (event, newPage) => {
+  const handleLimitChange = (event) => {
+    setLimit(event.target.value);
+    console.log('limit', limit);
+  };
+
+  const handlePageChange = (event, newPage) => {
     setPage(newPage);
+    console.log('wats in the event?', newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+  // Pagination portion
 
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
+  const useStyles1 = makeStyles((theme) => ({
+    root: {
+      flexShrink: 0,
+      marginLeft: theme.spacing(2.5)
+    }
+  }));
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  function TablePaginationActions(props) {
+    const classes = useStyles1();
+    const theme = useTheme();
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    const { count, page, onPageChange, rowsPerPage } = props;
+    const handleFirstPageButtonClick = (event) => {
+      onPageChange(event, 0);
+    };
+
+    const handleBackButtonClick = (event) => {
+      onPageChange(event, page - 1);
+    };
+
+    const handleNextButtonClick = (event) => {
+      onPageChange(event, page + 1);
+    };
+
+    const handleLastPageButtonClick = (event) => {
+      onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+    };
+
+    return (
+      <div className={classes.root}>
+        <IconButton
+          onClick={handleFirstPageButtonClick}
+          disabled={page === 0}
+          aria-label="first page"
+        >
+          {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+        </IconButton>
+        <IconButton
+          onClick={handleBackButtonClick}
+          disabled={page === 0}
+          aria-label="previous page"
+        >
+          {theme.direction === 'rtl' ? (
+            <KeyboardArrowRight />
+          ) : (
+            <KeyboardArrowLeft />
+          )}
+        </IconButton>
+        <IconButton
+          onClick={handleNextButtonClick}
+          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+          aria-label="next page"
+        >
+          {theme.direction === 'rtl' ? (
+            <KeyboardArrowLeft />
+          ) : (
+            <KeyboardArrowRight />
+          )}
+        </IconButton>
+        <IconButton
+          onClick={handleLastPageButtonClick}
+          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+          aria-label="last page"
+        >
+          {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+        </IconButton>
+      </div>
+    );
+  }
 
   return (
     <div className={classes.root}>
@@ -331,7 +400,7 @@ export default function EnhancedTable() {
                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
-              )}
+              ))}
             </TableBody>
           </Table>
         </TableContainer>
@@ -349,6 +418,12 @@ export default function EnhancedTable() {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
-    </div>
+    </Card>
   );
-}
+};
+
+CustomerListResults.propTypes = {
+  customers: PropTypes.object.isRequired
+};
+
+export default CustomerListResults;
