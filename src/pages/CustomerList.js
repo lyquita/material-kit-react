@@ -7,7 +7,7 @@ import axios from 'axios';
 
 function CustomerList() {
   const [customers, setCustomers] = useState([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios(`http://127.0.0.1:8000/course/?page=${page+1}`);
