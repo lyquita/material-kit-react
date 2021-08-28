@@ -244,6 +244,39 @@ const CustomerListResults = ({ customers, page, setPage, ...rest }) => {
     return 0;
   }
 
+  function EmptyList(){
+    return(
+      <Typography>there is no data here</Typography>
+    )
+  }
+  function ResultList(){
+    return (
+      <>
+        {
+             stableSort(customerlist, getComparator(order, orderBy))
+             .map((row,index)=>{
+               return (
+                 <TableRow >
+                   <TableCell padding="checkbox">
+                     <Checkbox 
+                     />
+                   </TableCell>
+                   <TableCell>{row.coachname}</TableCell>
+                   <TableCell>{row.coursename}</TableCell>
+                   <TableCell>{row.placename}</TableCell>
+                   <TableCell>{row.coursedate}</TableCell>
+                   <TableCell>{row.starttime}</TableCell>
+                   <TableCell>{row.endtime}</TableCell>
+                   <TableCell>{row.orderamount}</TableCell>
+                   <TableCell>{row.signamount}</TableCell>
+                   <TableCell>{row.fee}</TableCell>
+                 </TableRow>
+               )
+             })
+        }
+      </>
+    )
+  }
 
   return (
     <Card {...rest}>
@@ -252,65 +285,10 @@ const CustomerListResults = ({ customers, page, setPage, ...rest }) => {
           <Table>
             <CustomTableHead order={order} orderBy={orderBy} onRequestSort = {handleRequestSort}/>
             <TableBody>
+
               {
-                stableSort(customerlist, getComparator(order, orderBy))
-                .map((row,index)=>{
-                  return (
-                    <TableRow >
-                      <TableCell padding="checkbox">
-                        <Checkbox 
-                        />
-                      </TableCell>
-                      <TableCell>{row.coachname}</TableCell>
-                      <TableCell>{row.coursename}</TableCell>
-                      <TableCell>{row.placename}</TableCell>
-                      <TableCell>{row.coursedate}</TableCell>
-                      <TableCell>{row.starttime}</TableCell>
-                      <TableCell>{row.endtime}</TableCell>
-                      <TableCell>{row.orderamount}</TableCell>
-                      <TableCell>{row.signamount}</TableCell>
-                      <TableCell>{row.fee}</TableCell>
-
-
-                    </TableRow>
-                  )
-                })
+                customerlist ? <ResultList /> : <EmptyList />
               }
-              {/* {customerlist.slice(0, limit).map((customer) => (
-                <TableRow
-                  hover
-                  key={customer.id}
-                  selected={selectedCustomerIds.indexOf(customer.id) !== -1}
-                >
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, customer.id)}
-                      value="true"
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Box
-                      sx={{
-                        alignItems: 'center',
-                        display: 'flex'
-                      }}
-                    >
-                      <Typography color="textPrimary" variant="body1">
-                        {customer.coachname}
-                      </Typography>
-                    </Box>
-                  </TableCell>
-                  <TableCell>{customer.coursename}</TableCell>
-                  <TableCell>{customer.placename}</TableCell>
-                  <TableCell>{customer.coursedate}</TableCell>
-                  <TableCell>{customer.starttime}</TableCell>
-                  <TableCell>{customer.endtime}</TableCell>
-                  <TableCell>{customer.orderamount}</TableCell>
-                  <TableCell>{customer.signamount}</TableCell>
-                  <TableCell>{customer.fee}</TableCell>
-                </TableRow>
-              ))} */}
             </TableBody>
           </Table>
         </Box>
