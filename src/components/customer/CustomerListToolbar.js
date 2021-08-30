@@ -6,7 +6,8 @@ import {
   TextField,
   InputAdornment,
   SvgIcon,
-  MenuItem
+  MenuItem,
+  makeStyles
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
 import {
@@ -19,6 +20,7 @@ import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import { useState } from 'react';
+import { format } from 'date-fns'
 
 const Locations = [
   {
@@ -59,20 +61,47 @@ const Locations = [
   }
 ];
 
+const useStyles = makeStyles({
+  filter: {
+    width: "30% !important"
+  }
+})
+
 // 将用户输入的值 放入state中
 
 const CustomerListToolbar = (props) => {
   const { handleChange } = props;
   const [inputValue, setInputvalue] = useState('');
   const [targetId, setTargetid] = useState('');
-
+  const classes = useStyles();
   function handleInput(e) {
-    setInputvalue(e.target.value)
-    setTargetid(e.target.id)
+    console.log('child',e)
+
+    switch(e.type){
+      case 'change' :
+        setInputvalue(e.target.value)
+        setTargetid(e.target.id)
+        console.log('e.change')
+        break;
+      case 'click':
+        setInputvalue(e.target.value)
+        setTargetid(e.target.name)
+        break;
+      default:
+        console.log('got error when handleInput')
+    }
+  
+  }
+  const handleDateChange =(date)=>{
+    let formatDate = format(date,'yyyy-MM-dd')
+    let targetId = 'coursedate'
+    setInputvalue(formatDate);
+    setTargetid(targetId);
   }
 
   handleChange(inputValue, targetId);
 
+  
   return (
     <Box {...props}>
       <Box
@@ -81,16 +110,16 @@ const CustomerListToolbar = (props) => {
           justifyContent: 'flex-end'
         }}
       >
-        <Button>Import</Button>
+        {/* <Button>Import</Button>
         <Button sx={{ mx: 1 }}>Export</Button>
         <Button color="primary" variant="contained">
           Add Course
-        </Button>
+        </Button> */}
       </Box>
-      <Box sx={{ mt: 3 }}>
+      <Box sx={{ mt: 3}}>
         <Card>
           <CardContent>
-            <Box sx={{ maxWidth: 500 }}>
+            <Box>
               <TextField
                 fullWidth
                 InputProps={{
@@ -106,6 +135,7 @@ const CustomerListToolbar = (props) => {
                 variant="outlined"
                 id='coachname'
                 onChange={handleInput}
+                className={classes.filter}
                 // onChange = {handleChange('kyomo', 'coachname')}
               />
               <TextField
@@ -121,43 +151,33 @@ const CustomerListToolbar = (props) => {
                 }}
                 placeholder="Search course name"
                 variant="outlined"
+                id="coursename"
+                onChange={handleInput}
+                className={classes.filter}
+
               />
-              <TextField fullWidth select label="Select Location">
+              <TextField fullWidth select label="Select Location" onChange={handleInput} name="placename" className={classes.filter}>
                 {Locations.map((option) => (
                   <MenuItem key={option.placeid} value={option.placename}>
                     {option.placename}
                   </MenuItem>
                 ))}
               </TextField>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <MuiPickersUtilsProvider utils={DateFnsUtils} className={classes.filter}>
                 <KeyboardDatePicker
                   disableToolbar
                   variant="inline"
                   format="MM/dd/yyyy"
                   margin="normal"
-                  id="course-date-start"
+                  id="coursedate"
                   label="Course Date Start"
-                  // value={selectedDate}
-                  // onChange={handleDateChange}
+                  onChange={handleDateChange}
                   KeyboardButtonProps={{
                     'aria-label': 'change date'
                   }}
-                />
-                <KeyboardDatePicker
-                  disableToolbar
-                  variant="inline"
-                  format="MM/dd/yyyy"
-                  margin="normal"
-                  id="course-date-end"
-                  label="Course Date End"
-                  // value={selectedDate}
-                  // onChange={handleDateChange}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date'
-                  }}
+                  value='coursedate'
                 />
               </MuiPickersUtilsProvider>
-              <Button>Submit</Button>
             </Box>
           </CardContent>
         </Card>

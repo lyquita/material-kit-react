@@ -8,7 +8,8 @@ import axios from 'axios';
 function CustomerList() {
   const [customers, setCustomers] = useState([]);
   const [page, setPage] = useState(0);
-  const [coachname, setCoachname] = useState('胤儿');
+  const [coachname, setCoachname] = useState('');
+  const [coursename, setCoursename] = useState('');
   const [placename, setPlacename] = useState('');
   const [coursedate, setCoursedate] = useState('');
   const [starttime, setStarttime] = useState('');
@@ -19,6 +20,7 @@ function CustomerList() {
   const params = {
     page: page + 1,
     coachname: coachname,
+    coursename: coursename,
     placename: placename,
     coursedate: coursedate,
     starttime: starttime,
@@ -34,14 +36,26 @@ function CustomerList() {
       console.log('params', params)
     };
     fetchData();
-  }, [page,coachname]);
+  }, [page,coachname,coursename,placename,coursedate]);
 
   // toolbar handle
   function searchHandler(inputValue, param) {
    console.log('props from child', inputValue, param)
-   if(param='coachname'){
-     setCoachname(inputValue)
-   }
+  switch(param){
+    case 'coachname':
+      setCoachname(inputValue)
+      break;
+    case 'coursename':
+      setCoursename(inputValue)
+      break;
+    case 'placename':
+      setPlacename(inputValue)
+      break;
+    case 'coursedate':
+      setCoursedate(inputValue)
+    default:
+      console.log('got error when using switch case')
+  }
 
   }
 
