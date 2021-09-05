@@ -177,9 +177,12 @@ const CustomerListResults = ({ customers, page, setPage, ...rest }) => {
     { id: 'coursedate', numeric: false, label: 'Course Date' },
     { id: 'starttime', numeric: false, label: 'Start Time' },
     { id: 'endtime', numeric: false, label: 'End Time' },
-    { id: 'orderamount', numeric: false, label: 'Order Amount' },
-    { id: 'signamount', numeric: false, label: 'Sign Amount' },
-    { id: 'fee', numeric: false, label: 'Fee' }
+    { id: 'orderamount', numeric: true, label: 'Order Amount' },
+    { id: 'signamount', numeric: true, label: 'Sign Amount' },
+    { id: 'fee', numeric: true, label: 'Fee' },
+    { id: 'accommodateamount', numeric: true, label: 'Accommodate' },
+    { id: 'occupyrate', numeric: true, label: 'Occupy Rate' },
+    { id: 'costperuser', numeric:true, label:'Cost/Per Student'}
   ];
 
   function CustomTableHead(props) {
@@ -270,6 +273,9 @@ const CustomerListResults = ({ customers, page, setPage, ...rest }) => {
                    <TableCell>{row.orderamount}</TableCell>
                    <TableCell>{row.signamount}</TableCell>
                    <TableCell>{row.fee}</TableCell>
+                   <TableCell>{row.accommodateAmount}</TableCell>
+                   <TableCell>{(row.orderamount/row.accommodateAmount).toFixed(2)}</TableCell>
+                   <TableCell>{(row.fee/row.signamount).toFixed(2)}</TableCell>
                  </TableRow>
                )
              })
@@ -300,7 +306,7 @@ const CustomerListResults = ({ customers, page, setPage, ...rest }) => {
         onRowsPerPageChange={handleLimitChange}
         page={page}
         rowsPerPage={limit}
-        rowsPerPageOptions={[10]}
+        rowsPerPageOptions={[5,10,25,50]}
         ActionsComponent={TablePaginationActions}
       />
     </Card>
