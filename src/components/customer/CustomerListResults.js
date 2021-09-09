@@ -39,6 +39,7 @@ const CustomerListResults = ({ customers, page, setPage, ...rest }) => {
   const [limit, setLimit] = useState(10);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('coursename');
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
 
 // handler
@@ -79,6 +80,10 @@ const CustomerListResults = ({ customers, page, setPage, ...rest }) => {
     }
 
     setSelectedCustomerIds(newSelectedCustomerIds);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(event.target.value)
   };
 
   const handleLimitChange = (event) => {
@@ -257,6 +262,7 @@ const CustomerListResults = ({ customers, page, setPage, ...rest }) => {
       <>
         {
              stableSort(customerlist, getComparator(order, orderBy))
+             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
              .map((row,index)=>{
                return (
                  <TableRow >
@@ -303,9 +309,9 @@ const CustomerListResults = ({ customers, page, setPage, ...rest }) => {
         component="div"
         count={counts}
         onPageChange={handlePageChange}
-        onRowsPerPageChange={handleLimitChange}
+        onRowsPerPageChange={handleChangeRowsPerPage}
         page={page}
-        rowsPerPage={limit}
+        rowsPerPage={rowsPerPage}
         rowsPerPageOptions={[5,10,25,50]}
         ActionsComponent={TablePaginationActions}
       />

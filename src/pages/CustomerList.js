@@ -11,7 +11,8 @@ function CustomerList() {
   const [coachname, setCoachname] = useState('');
   const [coursename, setCoursename] = useState('');
   const [placename, setPlacename] = useState('');
-  const [coursedate, setCoursedate] = useState('');
+  const [coursedateAfter, setCoursedateAfter] = useState('');
+  const [coursedateBefore, setCoursedateBefore] = useState('');
   const [starttime, setStarttime] = useState('');
   const [endtime, setEndtime] = useState('');
   const [orderamount, setorderAmount] = useState('');
@@ -22,7 +23,8 @@ function CustomerList() {
     coachname: coachname,
     coursename: coursename,
     placename: placename,
-    coursedate: coursedate,
+    coursedate_after: coursedateAfter,
+    coursedate_before: coursedateBefore,
     starttime: starttime,
     endtime: endtime,
     orderamount: orderamount,
@@ -36,7 +38,7 @@ function CustomerList() {
       console.log('params', params)
     };
     fetchData();
-  }, [page,coachname,coursename,placename,coursedate]);
+  }, [page,coachname,coursename,placename,coursedateAfter,coursedateBefore]);
 
   // toolbar handle
   function searchHandler(inputValue, param) {
@@ -51,8 +53,12 @@ function CustomerList() {
     case 'placename':
       setPlacename(inputValue)
       break;
-    case 'coursedate':
-      setCoursedate(inputValue)
+    case 'coursedateAfter':
+      setCoursedateAfter(inputValue)
+      break;
+    case 'coursedateBefore':
+      setCoursedateBefore(inputValue)
+      break;
     default:
       console.log('got error when using switch case')
   }

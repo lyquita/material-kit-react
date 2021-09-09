@@ -92,11 +92,18 @@ const CustomerListToolbar = (props) => {
     }
   
   }
-  const handleDateChange =(date)=>{
+  const handleDateAfterChange =(date)=>{
     let formatDate = format(date,'yyyy-MM-dd')
-    let targetId = 'coursedate'
+    let targetId = 'coursedateAfter'
     setInputvalue(formatDate);
     setTargetid(targetId);
+  }
+
+  const handleDateBeforeChange = (date) =>{
+    let formatDate = format(date,'yyyy-MM-dd')
+    let targetId = 'coursedateBefore'
+    setInputvalue(formatDate)
+    setTargetid(targetId)
   }
 
   handleChange(inputValue, targetId);
@@ -169,9 +176,24 @@ const CustomerListToolbar = (props) => {
                   variant="inline"
                   format="MM/dd/yyyy"
                   margin="normal"
+                  id="coursedateAfter"
+                  label="Course Date After"
+                  onChange={handleDateAfterChange}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date'
+                  }}
+                  value='coursedateAfter'
+                />
+              </MuiPickersUtilsProvider>
+              <MuiPickersUtilsProvider utils={DateFnsUtils} className={classes.filter}>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  format="MM/dd/yyyy"
+                  margin="normal"
                   id="coursedate"
-                  label="Course Date Start"
-                  onChange={handleDateChange}
+                  label="Course Date Before"
+                  onChange={handleDateBeforeChange}
                   KeyboardButtonProps={{
                     'aria-label': 'change date'
                   }}
