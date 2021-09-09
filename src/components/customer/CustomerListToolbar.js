@@ -106,6 +106,10 @@ const CustomerListToolbar = (props) => {
     setTargetid(targetId)
   }
 
+ function handleResetClick (){
+  window.location.reload()
+ }
+
   handleChange(inputValue, targetId);
 
   
@@ -201,6 +205,7 @@ const CustomerListToolbar = (props) => {
                 />
               </MuiPickersUtilsProvider>
             </Box>
+            <Button variant="contained" color="primary" onClick={handleResetClick}>Reset</Button>
           </CardContent>
         </Card>
       </Box>

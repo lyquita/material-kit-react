@@ -62,8 +62,8 @@ function CustomerList() {
     default:
       console.log('got error when using switch case')
   }
-
   }
+
 
   return (
     <>
@@ -78,7 +78,7 @@ function CustomerList() {
         }}
       >
         <Container maxWidth={false}>
-          <CustomerListToolbar handleChange={searchHandler} />
+          <CustomerListToolbar handleChange={searchHandler}/>
           <Box sx={{ pt: 3 }}>
             <CustomerListResults
               customers={customers}

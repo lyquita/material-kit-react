@@ -86,6 +86,8 @@ const CustomerListResults = ({ customers, page, setPage, ...rest }) => {
     setRowsPerPage(event.target.value)
   };
 
+ 
+
   const handleLimitChange = (event) => {
     setLimit(event.target.value);
     console.log('limit', limit);
