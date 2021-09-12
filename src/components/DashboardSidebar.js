@@ -14,6 +14,7 @@ import {
 import {
   // AlertCircle as AlertCircleIcon,
   BarChart as BarChartIcon,
+  FileText as FileTextIcon,
   // Lock as LockIcon,
   // Settings as SettingsIcon,
   // ShoppingBag as ShoppingBagIcon,
@@ -40,6 +41,11 @@ const items = [
     icon: UsersIcon,
     title: 'Courses'
   },
+  {
+    href: '/app/summary',
+    icon: FileTextIcon,
+    title: 'Summary'
+  }
   // {
   //   href: '/app/products',
   //   icon: ShoppingBagIcon,

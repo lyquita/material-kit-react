@@ -19,16 +19,11 @@ const Sales = (props) => {
     datasets: [
       {
         backgroundColor: colors.indigo[500],
-        data: [18, 5, 19, 27, 29, 19, 20],
-        label: 'This year'
+        data: [18, 5, 19, 27, 29, 19, 20,50],
+        label: 'Order Amount'
       },
-      {
-        backgroundColor: colors.grey[200],
-        data: [11, 20, 12, 29, 30, 25, 13],
-        label: 'Last year'
-      }
     ],
-    labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug']
+    labels: ['Hip hop', 'MV Dance', 'Swag', 'Jazz', 'Locking', '编舞','Wacking','K-Pop']
   };
 
   const options = {
@@ -89,16 +84,7 @@ const Sales = (props) => {
   return (
     <Card {...props}>
       <CardHeader
-        action={(
-          <Button
-            endIcon={<ArrowDropDownIcon />}
-            size="small"
-            variant="text"
-          >
-            Last 7 days
-          </Button>
-        )}
-        title="Latest Sales"
+        title="Average Order Amount"
       />
       <Divider />
       <CardContent>
