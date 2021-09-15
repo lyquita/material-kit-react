@@ -23,7 +23,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { property } from 'lodash';
 
-const CustomerListResults = ({ customers, page, setPage, ...rest }) => {
+const CustomerListResults = ({ customers, page, setPage, pagesize, setPageSize, ...rest }) => {
   const [customerlist, setCustomerlist] = useState([]);
   const [counts, setCounts] = useState(10);
   useEffect(() => {
@@ -84,6 +84,7 @@ const CustomerListResults = ({ customers, page, setPage, ...rest }) => {
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(event.target.value)
+    setPageSize(event.target.value)
   };
 
  
@@ -264,7 +265,6 @@ const CustomerListResults = ({ customers, page, setPage, ...rest }) => {
       <>
         {
              stableSort(customerlist, getComparator(order, orderBy))
-             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
              .map((row,index)=>{
                return (
                  <TableRow >

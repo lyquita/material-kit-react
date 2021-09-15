@@ -18,6 +18,7 @@ function CustomerList() {
   const [orderamount, setorderAmount] = useState('');
   const [signamount, setSignamount] = useState('');
   const [fee, setFee] = useState('');
+  const [pagesize, setPageSize] = useState(10)
   const params = {
     page: page + 1,
     coachname: coachname,
@@ -29,16 +30,17 @@ function CustomerList() {
     endtime: endtime,
     orderamount: orderamount,
     signamount: signamount,
-    fee: fee
+    fee: fee,
+    page_size: pagesize
   };
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios(`http://dance-api.hireoo.me/course/`, { params });
+      const res = await axios(`http://47.100.69.215/course/`, { params });
       setCustomers(res);
       console.log('params', params)
     };
     fetchData();
-  }, [page,coachname,coursename,placename,coursedateAfter,coursedateBefore]);
+  }, [page,coachname,coursename,placename,coursedateAfter,coursedateBefore,pagesize]);
 
   // toolbar handle
   function searchHandler(inputValue, param) {
@@ -64,6 +66,8 @@ function CustomerList() {
   }
   }
 
+  console.log('page', page)
+
 
   return (
     <>
@@ -84,6 +88,8 @@ function CustomerList() {
               customers={customers}
               page={page}
               setPage={setPage}
+              pagesize={pagesize}
+              setPageSize={setPageSize}
             />
           </Box>
         </Container>
