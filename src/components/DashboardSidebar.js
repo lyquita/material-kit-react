@@ -40,12 +40,12 @@ const items = [
     href: '/app/customers',
     icon: UsersIcon,
     title: 'Courses'
-  },
-  {
-    href: '/app/summary',
-    icon: FileTextIcon,
-    title: 'Summary'
   }
+  // {
+  //   href: '/app/summary',
+  //   icon: FileTextIcon,
+  //   title: 'Summary'
+  // }
   // {
   //   href: '/app/products',
   //   icon: ShoppingBagIcon,
