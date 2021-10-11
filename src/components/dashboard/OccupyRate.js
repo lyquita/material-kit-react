@@ -13,7 +13,7 @@ import {
   
   const OccupyRate = (props) => {
     const { handleBudgetClick } = props
-    const { avgOccupyRate } = props
+    const { avg_occupy_rate } = props
     return (
     <Card
       {...props}
@@ -36,7 +36,7 @@ import {
               color="textPrimary"
               variant="h3"
             >
-              { Math.round(avgOccupyRate*10000)/100 } %
+              { Math.round(avg_occupy_rate*10000)/100 } %
             </Typography>
           </Grid>
           <Grid item>

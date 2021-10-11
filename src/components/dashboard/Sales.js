@@ -11,21 +11,31 @@ import {
 } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import { useEffect, useState } from 'react'
 
 const Sales = (props) => {
+  
   const theme = useTheme();
   const { labels } = props;
-  const { avgOrderAmountData } = props;
-  console.log('avgOrderAmount', props)
+  const { avg_order_amount_data } = props;
+  const [labelsState, setLabelsState] = useState([])
+  const [ avgOrderAmountState, setAvgOrderAmountState ] = useState([])
+
+  useEffect(()=>{
+    setLabelsState(labels)
+    setAvgOrderAmountState(avg_order_amount_data)
+  },[])
+
+
   const data = {
     datasets: [
       {
         backgroundColor: colors.indigo[500],
-        data: avgOrderAmountData,
+        data: avgOrderAmountState,
         label: 'Order Amount'
       },
     ],
-    labels: labels
+    labels: labelsState
   };
 
   const options = {
@@ -85,6 +95,7 @@ const Sales = (props) => {
 
   return (
     <Card {...props}>
+      {console.log(' render ')}
       <CardHeader
         title="Average Order Amount"
       />

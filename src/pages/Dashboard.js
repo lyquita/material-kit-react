@@ -105,20 +105,20 @@ const Dashboard = () => {
                   <DashboardToolBar />
                   <Grid container className={classes.itemContainer}>
                     <Grid items sm={6}>
-                      <OrderAmount handleBudgetClick={handleBudgetClick} avgOrderAmount={avgOrderAmount}/>
+                      <OrderAmount handleBudgetClick={handleBudgetClick} avg_order_amount={avgOrderAmount}/>
                     </Grid>
                     <Grid items sm={6}>
-                      <SignAmount  handleBudgetClick={handleBudgetClick} avgSignAmount={avgSignAmount}/>
+                      <SignAmount  handleBudgetClick={handleBudgetClick} avg_sign_amount={avgSignAmount}/>
                     </Grid>
                     <Grid items sm={6}>
-                      <CostPerUser  handleBudgetClick={handleBudgetClick} avgCostPerUser={avgCostPerUser}/>
+                      <CostPerUser  handleBudgetClick={handleBudgetClick} avg_cost_per_user={avgCostPerUser}/>
                     </Grid>
                     <Grid items sm={6}>
-                      <OccupyRate  handleBudgetClick={handleBudgetClick} avgOccupyRate={avgOccupyRate}/>
+                      <OccupyRate  handleBudgetClick={handleBudgetClick} avg_occupy_rate={avgOccupyRate}/>
                     </Grid>
                     <Grid item sm={12}>
                       {/* <AverageOrderAmountChart /> */}
-                      <Sales labels = {labelsState} avgOrderAmountData = {avgOrderAmountData} />
+                      <Sales labels = {labelsState} avg_order_amount_data = {avgOrderAmountData} />
                     </Grid>
                   </Grid>
                 </Grid>

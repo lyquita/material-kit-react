@@ -12,7 +12,7 @@ import MoneyIcon from '@material-ui/icons/Money';
 import { red } from '@material-ui/core/colors';
 
 const CostPerUser = (props) => {
-  const { avgCostPerUser } = props
+  const { avg_cost_per_user } = props
 
   return (
     <Card {...props}>
@@ -23,7 +23,7 @@ const CostPerUser = (props) => {
               Average Cost Per User
             </Typography>
             <Typography color="textPrimary" variant="h3">
-             ￥ {  Math.floor(avgCostPerUser* 100) /100  } 
+             ￥ {  Math.floor(avg_cost_per_user* 100) /100  } 
             </Typography>
           </Grid>
           <Grid item>
