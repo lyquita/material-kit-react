@@ -1,39 +1,29 @@
 import {
-    Avatar,
-    Button,
-    Box,
-    Card,
-    CardContent,
-    Grid,
-    Typography
-  } from '@material-ui/core';
-  import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-  import MoneyIcon from '@material-ui/icons/Money';
-  import { red } from '@material-ui/core/colors';
-  
-  const CostPerUser = (props) => (
-    <Card
-      {...props}
-    >
+  Avatar,
+  Button,
+  Box,
+  Card,
+  CardContent,
+  Grid,
+  Typography
+} from '@material-ui/core';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import MoneyIcon from '@material-ui/icons/Money';
+import { red } from '@material-ui/core/colors';
+
+const CostPerUser = (props) => {
+  const { avgCostPerUser } = props
+
+  return (
+    <Card {...props}>
       <CardContent>
-        <Grid
-          container
-          spacing={3}
-          sx={{ justifyContent: 'space-between' }}
-        >
+        <Grid container spacing={3} sx={{ justifyContent: 'space-between' }}>
           <Grid item>
-            <Typography
-              color="textSecondary"
-              gutterBottom
-              variant="h6"
-            >
-             Average Cost Per User
+            <Typography color="textSecondary" gutterBottom variant="h6">
+              Average Cost Per User
             </Typography>
-            <Typography
-              color="textPrimary"
-              variant="h3"
-            >
-              $24,000
+            <Typography color="textPrimary" variant="h3">
+             ￥ {  Math.floor(avgCostPerUser* 100) /100  } 
             </Typography>
           </Grid>
           <Grid item>
@@ -48,10 +38,12 @@ import {
             </Avatar>
           </Grid>
         </Grid>
-        <Button color="primary" variant="contained">View</Button>
+        <Button color="primary" variant="contained">
+          View
+        </Button>
       </CardContent>
     </Card>
   );
-  
-  export default CostPerUser;
-  
+};
+
+export default CostPerUser;

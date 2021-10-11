@@ -14,16 +14,18 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 const Sales = (props) => {
   const theme = useTheme();
-
+  const { labels } = props;
+  const { avgOrderAmountData } = props;
+  console.log('avgOrderAmount', props)
   const data = {
     datasets: [
       {
         backgroundColor: colors.indigo[500],
-        data: [18, 5, 19, 27, 29, 19, 20,50],
+        data: avgOrderAmountData,
         label: 'Order Amount'
       },
     ],
-    labels: ['Hip hop', 'MV Dance', 'Swag', 'Jazz', 'Locking', '编舞','Wacking','K-Pop']
+    labels: labels
   };
 
   const options = {

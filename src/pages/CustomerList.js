@@ -35,7 +35,7 @@ function CustomerList() {
   };
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios(`http://47.100.69.215/course/`, { params });
+      const res = await axios(`http://dance-api.hireoo.me/course/`, { params });
       setCustomers(res);
       console.log('params', params)
     };

@@ -13,7 +13,7 @@ import { red } from '@material-ui/core/colors';
 
 const OrderAmount = (props) => {
   const {handleBudgetClick} = props
-
+  const {avgOrderAmount} = props
   return (
   <Card {...props}>
     <CardContent>
@@ -23,7 +23,7 @@ const OrderAmount = (props) => {
             Average Order Amount
           </Typography>
           <Typography color="textPrimary" variant="h3">
-            $24,000
+            {avgOrderAmount}
           </Typography>
         </Grid>
         <Grid item>

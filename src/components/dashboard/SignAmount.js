@@ -13,6 +13,7 @@ import {
   
   const SignAmount = (props) => {
     const { handleBudgetClick } = props
+    const { avgSignAmount } = props
     return(
     <Card
       {...props}
@@ -35,7 +36,7 @@ import {
               color="textPrimary"
               variant="h3"
             >
-              $24,000
+              {avgSignAmount}
             </Typography>
           </Grid>
           <Grid item>
