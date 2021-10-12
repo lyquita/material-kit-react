@@ -36,16 +36,44 @@ const Dashboard = () => {
   const classes = useStyles();
   const labels = [];
   const avg_order_amount = [];
-
+  const [placeName, setPlaceName] = useState('huanyuhui')
+  const [targetId, setTargetId] = useState(88)
   const [labelsState, setLabelsState] = useState(labels)
   const [avgOrderAmountData, setAvgOrderAmountData] = useState(avg_order_amount)
   const [avgOrderAmount, setAvgOrderAmount] = useState(0)
   const [avgSignAmount, setAvgSignAmount] =useState(0)
   const [avgCostPerUser, setAvgCostPerUser] = useState(0)
   const [avgOccupyRate, setAvgOccupyRate] = useState(0)
+
+  function updateTargetId(value){
+    switch(value){
+      case "88":
+        return setPlaceName('huanyuhui')
+      case "1":
+        return setPlaceName('changshoulu')
+      case "84":
+        return setPlaceName('shijidadao')
+      case "81":
+        return setPlaceName('huaihai')
+      case "83":
+        return setPlaceName('laifushi')
+      case "92":
+        return setPlaceName('ganghui')
+      case "82":
+        return setPlaceName('longzhimeng')
+      case "93":
+        return setPlaceName('taipingyang')
+      case "94":
+        return setPlaceName('wujiaochang')
+      default:
+        return console.log('something wrong when update target id')
+    }
+  }
+
   useEffect(() => {
+
     const fetchData = async () => {
-      const res = await axios(`http://127.0.0.1:8000/course/huanyuhui/last_seven_days`);
+      const res = await axios(`http://127.0.0.1:8000/course/${placeName}/last_seven_days`);
       const result = res.data.results[0]
       // 去掉空值的对象
       Object.keys(result).forEach((item)=>{
@@ -57,8 +85,6 @@ const Dashboard = () => {
       const original_labels = ['hiphop_avg_orderamount','swag_avg_orderamount','choreography_avg_orderamount', 'locking_avg_orderamount', 'waacking_avg_orderamount', 'popping_avg_orderamount','k-pop_avg_orderamount','mvdance_avg_orderamount','souldance_avg_orderamount', 'special_avg_orderamount', 'heel_avg_orderamount', 'girl_avg_orderamount','jazz_avg_orderamount'];
       const avg_order_amount_list = ['hiphop_avg_orderamount','swag_avg_orderamount','choreography_avg_orderamount', 'locking_avg_orderamount', 'waacking_avg_orderamount', 'popping_avg_orderamount','k-pop_avg_orderamount','mvdance_avg_orderamount','souldance_avg_orderamount', 'special_avg_orderamount', 'heel_avg_orderamount', 'girl_avg_orderamount','jazz_avg_orderamount'];
       const avg_sign_amount_list = ['hiphop_avg_signamount','swag_avg_signamount','choreography_avg_signamount', 'locking_avg_signamount', 'waacking_avg_signamount', 'popping_avg_signamount','k-pop_avg_signamount','mvdance_avg_signamount','souldance_avg_signamount', 'special_avg_signamount', 'heel_avg_signamount', 'girl_avg_signamount','jazz_avg_signamount']
-
-
 
 
       for (const key in result){
@@ -79,11 +105,13 @@ const Dashboard = () => {
       setAvgSignAmount(result.avg_signamount)
       setAvgCostPerUser(result.avg_costperuser)
       setAvgOccupyRate(result.avg_occupyrate)
-
     
     };
     fetchData();
-  }, []);
+  }, [placeName]);
+
+    console.log('before update', placeName)
+    // console.log('update id', placeName)
 
   return (
     <>
@@ -102,7 +130,7 @@ const Dashboard = () => {
             <Grid item sm={6}>
               <Grid container>
                 <Grid item sm={12}>
-                  <DashboardToolBar />
+                  <DashboardToolBar set_place_name = {setPlaceName} updateTarget = {updateTargetId}/>
                   <Grid container className={classes.itemContainer}>
                     <Grid items sm={6}>
                       <OrderAmount handleBudgetClick={handleBudgetClick} avg_order_amount={avgOrderAmount}/>

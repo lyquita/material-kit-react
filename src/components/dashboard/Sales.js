@@ -95,7 +95,6 @@ const Sales = (props) => {
 
   return (
     <Card {...props}>
-      {console.log(' render ')}
       <CardHeader
         title="Average Order Amount"
       />

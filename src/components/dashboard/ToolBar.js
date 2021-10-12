@@ -21,7 +21,7 @@ import {
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
@@ -77,6 +77,8 @@ const useStyles = makeStyles({
 
 const DashboardToolBar = (props) => {
   const { handleChange } = props;
+  const { set_place_name } = props;
+  const { updateTarget } = props;
   const [inputValue, setInputvalue] = useState('');
   const [targetId, setTargetid] = useState('');
   const classes = useStyles();
@@ -94,6 +96,11 @@ const DashboardToolBar = (props) => {
     setInputvalue(formatDate);
     setTargetid(targetId);
   };
+
+  const handleOnChange =(e) =>{
+    set_place_name(e.target.dataset.value)
+    updateTarget(e.target.id)
+  }
 
   return (
     <Box {...props}>
@@ -126,51 +133,14 @@ const DashboardToolBar = (props) => {
                 label="Select Location"
                 name="placename"
                 className={classes.filter}
+                onClick={handleOnChange}
               >
                 {Locations.map((option) => (
-                  <MenuItem key={option.placeid} value={option.placename}>
+                  <MenuItem key={option.placeid} value={option.placename} id ={option.placeid}>
                     {option.placename}
                   </MenuItem>
                 ))}
               </TextField>
-            </Box>
-            <Box>
-            <MuiPickersUtilsProvider
-                utils={DateFnsUtils}
-                className={classes.filter}
-              >
-                <KeyboardDatePicker
-                  disableToolbar
-                  variant="inline"
-                  format="MM/dd/yyyy"
-                  margin="normal"
-                  id="coursedateAfter"
-                  label="Course Date After"
-                  onChange={handleDateAfterChange}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date'
-                  }}
-                  value="coursedateAfter"
-                />
-              </MuiPickersUtilsProvider>
-              <MuiPickersUtilsProvider
-                utils={DateFnsUtils}
-                className={classes.filter}
-              >
-                <KeyboardDatePicker
-                  disableToolbar
-                  variant="inline"
-                  format="MM/dd/yyyy"
-                  margin="normal"
-                  id="coursedate"
-                  label="Course Date Before"
-                  onChange={handleDateBeforeChange}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date'
-                  }}
-                  value="coursedate"
-                />
-              </MuiPickersUtilsProvider>
             </Box>
           </CardContent>
         </Card>
