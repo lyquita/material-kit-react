@@ -38,11 +38,17 @@ const Dashboard = () => {
   const classes = useStyles();
   const labels = [];
   const avg_order_amount = [];
+  const avg_sign_amount = [];
+  const avg_cost_per_user = [];
+  const avg_occupy_rate = [];
   const [placeName, setPlaceName] = useState('huanyuhui');
   const [targetId, setTargetId] = useState(88);
   const [labelsState, setLabelsState] = useState(labels);
   const [avgOrderAmountData, setAvgOrderAmountData] =
     useState(avg_order_amount);
+  const [avgSignAmountData, setAvgSignAmountData] = useState(avg_sign_amount);
+  const [costPerUserData, setCostPerUserData] = useState(avg_cost_per_user);
+  const [avgOccupyRateData, setAvgOccupyRateData] =useState(avg_occupy_rate);
   const [avgOrderAmount, setAvgOrderAmount] = useState(0);
   const [avgSignAmount, setAvgSignAmount] = useState(0);
   const [avgCostPerUser, setAvgCostPerUser] = useState(0);
@@ -131,6 +137,37 @@ const Dashboard = () => {
         'girl_avg_signamount',
         'jazz_avg_signamount'
       ];
+      const avg_cost_per_user_list = [
+        'hiphop_avg_costperuser',
+        'swag_avg_costperuser',
+        'choreography_avg_costperuser',
+        'locking_avg_costperuser',
+        'waacking_avg_costperuser',
+        'popping_avg_costperuser',
+        'k-pop_avg_costperuser',
+        'mvdance_avg_costperuser',
+        'souldance_avg_costperuser',
+        'special_avg_costperuser',
+        'heel_avg_costperuser',
+        'girl_avg_costperuser',
+        'jazz_avg_costperuser'
+      ];
+
+      const avg_occupy_rate_list = [
+        'hiphop_avg_occupyrate',
+        'swag_avg_occupyrate',
+        'choreography_avg_occupyrate',
+        'locking_avg_occupyrate',
+        'waacking_avg_occupyrate',
+        'popping_avg_occupyrate',
+        'k-pop_avg_occupyrate',
+        'mvdance_avg_occupyrate',
+        'souldance_avg_occupyrate',
+        'special_avg_occupyrate',
+        'heel_avg_occupyrate',
+        'girl_avg_occupyrate',
+        'jazz_avg_occupyrate'
+      ];
 
       for (const key in result) {
         if (original_labels.includes(key)) {
@@ -141,10 +178,19 @@ const Dashboard = () => {
       for (const key in result) {
         if (original_labels.includes(key)) {
           avg_order_amount.push(result[key]);
+        } else if (avg_sign_amount_list.includes(key)) {
+          avg_sign_amount.push(result[key]);
+        } else if (avg_cost_per_user_list.includes(key)){
+          avg_cost_per_user.push(result[key])
+        } else if (avg_occupy_rate_list.includes(key)){
+          avg_occupy_rate.push(result[key])
         }
       }
 
       setAvgOrderAmountData(avg_order_amount);
+      setAvgSignAmountData(avg_sign_amount);
+      setCostPerUserData(avg_cost_per_user);
+      setAvgOccupyRateData(avg_occupy_rate);
       setLabelsState(labels);
       setAvgOrderAmount(result.avg_orderamount);
       setAvgSignAmount(result.avg_signamount);
@@ -211,13 +257,16 @@ const Dashboard = () => {
                       />
                     </Grid>
                     <Grid item sm={6}>
-                      <AvgSignAmountChart />
+                      <AvgSignAmountChart
+                        labels={labelsState}
+                        avg_sign_amount_data={avgSignAmountData}
+                      />
                     </Grid>
                     <Grid item sm={6}>
-                      <CostPerUserChart />
+                      <CostPerUserChart  labels={labelsState} avg_cost_per_user_data = {costPerUserData}/>
                     </Grid>
                     <Grid item sm={6}>
-                      <OccupyRateChart />
+                      <OccupyRateChart labels={labelsState} avg_occupy_rate_data = {avgOccupyRateData}/>
                     </Grid>
                   </Grid>
                 </Grid>

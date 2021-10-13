@@ -18,12 +18,14 @@ const OccupyRateChart = (props) => {
   const theme = useTheme();
   const { labels } = props;
   const { avg_order_amount_data } = props;
+  const { avg_occupy_rate_data } =props;
   const [labelsState, setLabelsState] = useState([])
-  const [ avgOrderAmountState, setAvgOrderAmountState ] = useState([])
+  const [ avgOccupyRateState, setAvgOccupyRateState ] = useState([])
+
 
   useEffect(()=>{
     setLabelsState(labels)
-    setAvgOrderAmountState(avg_order_amount_data)
+    setAvgOccupyRateState(avg_occupy_rate_data)
   },[])
 
 
@@ -31,7 +33,7 @@ const OccupyRateChart = (props) => {
     datasets: [
       {
         backgroundColor: colors.indigo[500],
-        data: avgOrderAmountState,
+        data: avgOccupyRateState,
         label: 'Occupy Rate'
       },
     ],

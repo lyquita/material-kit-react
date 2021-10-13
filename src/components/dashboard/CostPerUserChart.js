@@ -17,13 +17,15 @@ const CostPerUserChart = (props) => {
   
   const theme = useTheme();
   const { labels } = props;
-  const { avg_order_amount_data } = props;
+  const { avg_cost_per_user_data } = props;
   const [labelsState, setLabelsState] = useState([])
   const [ avgOrderAmountState, setAvgOrderAmountState ] = useState([])
+  const [ avgCostPerUserState, setCostPerUserState ] = useState([])
+
 
   useEffect(()=>{
     setLabelsState(labels)
-    setAvgOrderAmountState(avg_order_amount_data)
+    setCostPerUserState(avg_cost_per_user_data)
   },[])
 
 
@@ -31,7 +33,7 @@ const CostPerUserChart = (props) => {
     datasets: [
       {
         backgroundColor: colors.indigo[500],
-        data: avgOrderAmountState,
+        data: avgCostPerUserState,
         label: 'Cost Per User'
       },
     ],

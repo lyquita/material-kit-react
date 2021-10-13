@@ -18,12 +18,15 @@ const AvgSignAmountChart = (props) => {
   const theme = useTheme();
   const { labels } = props;
   const { avg_order_amount_data } = props;
+  const { avg_sign_amount_data } = props;
   const [labelsState, setLabelsState] = useState([])
   const [ avgOrderAmountState, setAvgOrderAmountState ] = useState([])
+  const [ avgSignAmountState, setAvgSignAmountState ] = useState([])
 
   useEffect(()=>{
     setLabelsState(labels)
     setAvgOrderAmountState(avg_order_amount_data)
+    setAvgSignAmountState(avg_sign_amount_data)
   },[])
 
 
@@ -31,7 +34,7 @@ const AvgSignAmountChart = (props) => {
     datasets: [
       {
         backgroundColor: colors.indigo[500],
-        data: avgOrderAmountState,
+        data: avgSignAmountState,
         label: 'Sign Amount'
       },
     ],
