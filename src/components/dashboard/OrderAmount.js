@@ -38,9 +38,9 @@ const OrderAmount = (props) => {
           </Avatar>
         </Grid>
       </Grid>
-      <Button color="primary" variant="contained" id="order-amount" onClick={handleBudgetClick}>
+      {/* <Button color="primary" variant="contained" id="order-amount" onClick={handleBudgetClick}>
         View
-      </Button>
+      </Button> */}
     </CardContent>
   </Card>
   )

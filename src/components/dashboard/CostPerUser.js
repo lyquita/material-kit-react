@@ -38,9 +38,9 @@ const CostPerUser = (props) => {
             </Avatar>
           </Grid>
         </Grid>
-        <Button color="primary" variant="contained">
+        {/* <Button color="primary" variant="contained">
           View
-        </Button>
+        </Button> */}
       </CardContent>
     </Card>
   );

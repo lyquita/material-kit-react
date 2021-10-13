@@ -51,7 +51,7 @@ import {
             </Avatar>
           </Grid>
         </Grid>
-        <Button color="primary" variant="contained" id='occupy-rate' onClick={handleBudgetClick}>View</Button>
+        {/* <Button color="primary" variant="contained" id='occupy-rate' onClick={handleBudgetClick}>View</Button> */}
 
       </CardContent>
     </Card>

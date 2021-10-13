@@ -51,7 +51,7 @@ import {
             </Avatar>
           </Grid>
         </Grid>
-        <Button color="primary" variant="contained" id='sign-amount'>View</Button>
+         {/* <Button color="primary" variant="contained" id='sign-amount'>View</Button> */}
       </CardContent>
     </Card>
     )

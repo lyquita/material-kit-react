@@ -206,7 +206,7 @@ const Dashboard = () => {
   return (
     <>
       <Helmet>
-        <title>Dashboard | Material Kit</title>
+        <title>Keep Moving</title>
       </Helmet>
       <Box
         sx={{
@@ -215,70 +215,71 @@ const Dashboard = () => {
           py: 3
         }}
       >
-        <Container maxWidth={false}>
-          <Grid container spacing={3} direction="row">
+        <Container maxWidth={false} >
+          <Grid container spacing={3} >
             <Grid item sm={12}>
-              <Grid container>
-                <Grid item sm={12}>
-                  <DashboardToolBar
-                    set_place_name={setPlaceName}
-                    updateTarget={updateTargetId}
+              <DashboardToolBar
+                set_place_name={setPlaceName}
+                updateTarget={updateTargetId}
+              />
+            </Grid>
+            <Grid item sm={12}>
+              <Grid container >
+                <Grid items sm={6}>
+                  <OrderAmount
+                    handleBudgetClick={handleBudgetClick}
+                    avg_order_amount={avgOrderAmount}
                   />
-                  <Grid container className={classes.itemContainer}>
-                    <Grid items sm={6}>
-                      <OrderAmount
-                        handleBudgetClick={handleBudgetClick}
-                        avg_order_amount={avgOrderAmount}
-                      />
-                    </Grid>
-                    <Grid items sm={6}>
-                      <SignAmount
-                        handleBudgetClick={handleBudgetClick}
-                        avg_sign_amount={avgSignAmount}
-                      />
-                    </Grid>
-                    <Grid items sm={6}>
-                      <CostPerUser
-                        handleBudgetClick={handleBudgetClick}
-                        avg_cost_per_user={avgCostPerUser}
-                      />
-                    </Grid>
-                    <Grid items sm={6}>
-                      <OccupyRate
-                        handleBudgetClick={handleBudgetClick}
-                        avg_occupy_rate={avgOccupyRate}
-                      />
-                    </Grid>
-                    <Grid item sm={6}>
-                      {/* <AverageOrderAmountChart /> */}
-                      <AvgOrderAmountChart
-                        labels={labelsState}
-                        avg_order_amount_data={avgOrderAmountData}
-                        placeName={placeName}
-                      />
-                    </Grid>
-                    <Grid item sm={6}>
-                      <AvgSignAmountChart
-                        labels={labelsState}
-                        avg_sign_amount_data={avgSignAmountData}
-                        placeName={placeName}
-                      />
-                    </Grid>
-                    <Grid item sm={6}>
-                      <CostPerUserChart
-                        labels={labelsState}
-                        avg_cost_per_user_data={costPerUserData}
-                        placeName ={placeName}
-                      />
-                    </Grid>
-                    <Grid item sm={6}>
-                      <OccupyRateChart
-                        labels={labelsState}
-                        avg_occupy_rate_data={avgOccupyRateData}
-                        placeName ={placeName}
-                      />
-                    </Grid>
-                  </Grid>
+                </Grid>
+                <Grid items sm={6}>
+                  <SignAmount
+                    handleBudgetClick={handleBudgetClick}
+                    avg_sign_amount={avgSignAmount}
+                  />
+                </Grid>
+                <Grid items sm={6}>
+                  <CostPerUser
+                    handleBudgetClick={handleBudgetClick}
+                    avg_cost_per_user={avgCostPerUser}
+                  />
+                </Grid>
+                <Grid items sm={6}>
+                  <OccupyRate
+                    handleBudgetClick={handleBudgetClick}
+                    avg_occupy_rate={avgOccupyRate}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Grid container spacing={3}>
+                <Grid item sm={6}>
+                  <AvgOrderAmountChart
+                    labels={labelsState}
+                    avg_order_amount_data={avgOrderAmountData}
+                    placeName={placeName}
+                  />
+                </Grid>
+                <Grid item sm={6}>
+                  <AvgSignAmountChart
+                    labels={labelsState}
+                    avg_sign_amount_data={avgSignAmountData}
+                    placeName={placeName}
+                  />
+                </Grid>
+                <Grid item sm={6}>
+                  <CostPerUserChart
+                    labels={labelsState}
+                    avg_cost_per_user_data={costPerUserData}
+                    placeName={placeName}
+                  />
+                </Grid>
+                <Grid item sm={6}>
+                  <OccupyRateChart
+                    labels={labelsState}
+                    avg_occupy_rate_data={avgOccupyRateData}
+                    placeName={placeName}
+                  />
                 </Grid>
               </Grid>
             </Grid>
