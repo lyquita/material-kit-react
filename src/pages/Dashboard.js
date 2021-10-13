@@ -53,7 +53,7 @@ const Dashboard = () => {
       case '88':
         return setPlaceName('huanyuhui');
       case '1':
-        return setPlaceName('changshoulu');
+        return setPlaceName('changshou');
       case '84':
         return setPlaceName('shijidadao');
       case '81':
