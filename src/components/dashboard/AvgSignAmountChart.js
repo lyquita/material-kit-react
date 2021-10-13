@@ -19,6 +19,7 @@ const AvgSignAmountChart = (props) => {
   const { labels } = props;
   const { avg_order_amount_data } = props;
   const { avg_sign_amount_data } = props;
+  const { placeName } = props;
   const [labelsState, setLabelsState] = useState([])
   const [ avgOrderAmountState, setAvgOrderAmountState ] = useState([])
   const [ avgSignAmountState, setAvgSignAmountState ] = useState([])
@@ -27,7 +28,7 @@ const AvgSignAmountChart = (props) => {
     setLabelsState(labels)
     setAvgOrderAmountState(avg_order_amount_data)
     setAvgSignAmountState(avg_sign_amount_data)
-  },[])
+  },[placeName])
 
 
   const data = {

@@ -48,7 +48,7 @@ const Dashboard = () => {
     useState(avg_order_amount);
   const [avgSignAmountData, setAvgSignAmountData] = useState(avg_sign_amount);
   const [costPerUserData, setCostPerUserData] = useState(avg_cost_per_user);
-  const [avgOccupyRateData, setAvgOccupyRateData] =useState(avg_occupy_rate);
+  const [avgOccupyRateData, setAvgOccupyRateData] = useState(avg_occupy_rate);
   const [avgOrderAmount, setAvgOrderAmount] = useState(0);
   const [avgSignAmount, setAvgSignAmount] = useState(0);
   const [avgCostPerUser, setAvgCostPerUser] = useState(0);
@@ -180,10 +180,10 @@ const Dashboard = () => {
           avg_order_amount.push(result[key]);
         } else if (avg_sign_amount_list.includes(key)) {
           avg_sign_amount.push(result[key]);
-        } else if (avg_cost_per_user_list.includes(key)){
-          avg_cost_per_user.push(result[key])
-        } else if (avg_occupy_rate_list.includes(key)){
-          avg_occupy_rate.push(result[key])
+        } else if (avg_cost_per_user_list.includes(key)) {
+          avg_cost_per_user.push(result[key]);
+        } else if (avg_occupy_rate_list.includes(key)) {
+          avg_occupy_rate.push(result[key]);
         }
       }
 
@@ -254,19 +254,29 @@ const Dashboard = () => {
                       <AvgOrderAmountChart
                         labels={labelsState}
                         avg_order_amount_data={avgOrderAmountData}
+                        placeName={placeName}
                       />
                     </Grid>
                     <Grid item sm={6}>
                       <AvgSignAmountChart
                         labels={labelsState}
                         avg_sign_amount_data={avgSignAmountData}
+                        placeName={placeName}
                       />
                     </Grid>
                     <Grid item sm={6}>
-                      <CostPerUserChart  labels={labelsState} avg_cost_per_user_data = {costPerUserData}/>
+                      <CostPerUserChart
+                        labels={labelsState}
+                        avg_cost_per_user_data={costPerUserData}
+                        placeName ={placeName}
+                      />
                     </Grid>
                     <Grid item sm={6}>
-                      <OccupyRateChart labels={labelsState} avg_occupy_rate_data = {avgOccupyRateData}/>
+                      <OccupyRateChart
+                        labels={labelsState}
+                        avg_occupy_rate_data={avgOccupyRateData}
+                        placeName ={placeName}
+                      />
                     </Grid>
                   </Grid>
                 </Grid>

@@ -18,13 +18,14 @@ const AvgOrderAmountChart = (props) => {
   const theme = useTheme();
   const { labels } = props;
   const { avg_order_amount_data } = props;
+  const { placeName } = props;
   const [labelsState, setLabelsState] = useState([])
   const [ avgOrderAmountState, setAvgOrderAmountState ] = useState([])
 
   useEffect(()=>{
     setLabelsState(labels)
     setAvgOrderAmountState(avg_order_amount_data)
-  },[])
+  },[placeName])
 
 
   const data = {
