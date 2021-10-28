@@ -1,5 +1,12 @@
 import { React, useEffect, useState } from 'react';
 import axios from 'axios';
+import {
+  Navigate,
+  Link,
+  BrowserRouter as Router,
+  Route,
+  useNavigate
+} from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Box, Container, Grid, Typography } from '@material-ui/core';
 import Budget from 'src/components/dashboard//Budget';
@@ -20,6 +27,8 @@ import AvgOrderAmountChart from 'src/components/dashboard/AvgOrderAmountChart';
 import AvgSignAmountChart from 'src/components/dashboard/AvgSignAmountChart';
 import CostPerUserChart from 'src/components/dashboard/CostPerUserChart';
 import OccupyRateChart from 'src/components/dashboard/OccupyRateChart';
+import Login from 'src/pages/Login';
+import NotFound from 'src/pages/NotFound';
 
 const useStyles = makeStyles({
   filter: {
@@ -35,12 +44,14 @@ const handleBudgetClick = (e) => {
 };
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const classes = useStyles();
   const labels = [];
   const avg_order_amount = [];
   const avg_sign_amount = [];
   const avg_cost_per_user = [];
   const avg_occupy_rate = [];
+  const [result, setResult] = useState([])
   const [placeName, setPlaceName] = useState('huanyuhui');
   const [targetId, setTargetId] = useState(88);
   const [labelsState, setLabelsState] = useState(labels);
@@ -80,11 +91,32 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios(
-        `http://127.0.0.1:8000/course/${placeName}/last_seven_days`
-      );
-      const result = res.data.results[0];
+    const fetchData = () => {
+      console.log('local store token', localStorage.getItem('token'))
+
+      axios.interceptors.request.use(config=>{
+        config.headers.common['Authorization']='Bearer ' + localStorage.getItem('token')
+        console.log('config', config)
+        return config
+      }, err=>{
+        console.log('err', err)
+      })
+
+      axios(`/course/${placeName}/last_seven_days`)
+        .then((res) => {
+          console.log('调取axios',res);
+          setResult(res.data.results[0])
+        })
+        .catch(function (error) {
+          if (error.response) {
+            if(401 === error.response.status){
+              console.log('401', error.response)
+              navigate('/login', {replace:true})
+            }
+          }
+        });
+
+
       // 去掉空值的对象
       Object.keys(result).forEach((item) => {
         const key = result[item];
@@ -199,8 +231,8 @@ const Dashboard = () => {
     };
     fetchData();
   }, [placeName]);
+  console.log('result state', result)
 
-  console.log('before update', placeName);
   // console.log('update id', placeName)
 
   return (
@@ -215,8 +247,8 @@ const Dashboard = () => {
           py: 3
         }}
       >
-        <Container maxWidth={false} >
-          <Grid container spacing={3} >
+        <Container maxWidth={false}>
+          <Grid container spacing={3}>
             <Grid item sm={12}>
               <DashboardToolBar
                 set_place_name={setPlaceName}
@@ -224,7 +256,7 @@ const Dashboard = () => {
               />
             </Grid>
             <Grid item sm={12}>
-              <Grid container >
+              <Grid container>
                 <Grid items sm={6}>
                   <OrderAmount
                     handleBudgetClick={handleBudgetClick}

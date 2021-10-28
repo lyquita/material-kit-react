@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   AppBar,
@@ -16,7 +16,13 @@ import Logo from './Logo';
 
 const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
   const [notifications] = useState([]);
-
+  const navigate = useNavigate();
+  const handleLogOut = () =>{
+    window.localStorage.removeItem('token')
+    console.log('after remove token', localStorage.getItem('token'))
+    navigate('/login', {replace:true})
+    
+  }
   return (
     <AppBar
       elevation={0}
@@ -28,7 +34,7 @@ const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
         </RouterLink>
         <Box sx={{ flexGrow: 1 }} />
         <Hidden lgDown>
-          <IconButton color="inherit">
+          {/* <IconButton color="inherit">
             <Badge
               badgeContent={notifications.length}
               color="primary"
@@ -36,8 +42,8 @@ const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
             >
               <NotificationsIcon />
             </Badge>
-          </IconButton>
-          <IconButton color="inherit">
+          </IconButton> */}
+          <IconButton color="inherit" onClick={handleLogOut}>
             <InputIcon />
           </IconButton>
         </Hidden>

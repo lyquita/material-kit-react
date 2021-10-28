@@ -115,7 +115,6 @@ const DashboardToolBar = (props) => {
           <CardHeader
             action={
               <Button
-                endIcon={<ArrowDropDownIcon />}
                 size="small"
                 variant="text"
               >
