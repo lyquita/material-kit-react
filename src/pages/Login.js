@@ -52,8 +52,12 @@ function handleSubmit(e){
       minHeight: '100%',
       py:3
     }}>
-      <Container>
-      <h1> Login </h1>
+      <Container sx={{
+        textAlign: 'center',
+        paddingTop: '20%'
+
+      }} >
+      <Typography style={{marginBottom:15, fontSize:30}}> Login </Typography>
       <form onSubmit={handleSubmit}>
         <TextField label="username" defaultValue={username} onChange={handleUsername}/>
         <TextField label="password" type="password" onChange={handlePassword}/>

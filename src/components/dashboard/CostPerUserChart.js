@@ -27,7 +27,7 @@ const CostPerUserChart = (props) => {
   useEffect(()=>{
     setLabelsState(labels)
     setCostPerUserState(avg_cost_per_user_data)
-  },[placeName])
+  },[placeName, avgCostPerUserState])
 
 
   const data = {

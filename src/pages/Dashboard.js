@@ -96,7 +96,6 @@ const Dashboard = () => {
 
       axios.interceptors.request.use(config=>{
         config.headers.common['Authorization']='Bearer ' + localStorage.getItem('token')
-        console.log('config', config)
         return config
       }, err=>{
         console.log('err', err)
@@ -230,7 +229,8 @@ const Dashboard = () => {
       setAvgOccupyRate(result.avg_occupyrate);
     };
     fetchData();
-  }, [placeName]);
+  }, [placeName, result.id]);
+
   console.log('result state', result)
 
   // console.log('update id', placeName)

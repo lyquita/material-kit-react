@@ -28,7 +28,7 @@ const AvgSignAmountChart = (props) => {
     setLabelsState(labels)
     setAvgOrderAmountState(avg_order_amount_data)
     setAvgSignAmountState(avg_sign_amount_data)
-  },[placeName])
+  },[placeName, avgSignAmountState])
 
 
   const data = {
