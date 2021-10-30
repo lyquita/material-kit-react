@@ -1,7 +1,6 @@
 import { Bar } from 'react-chartjs-2';
 import {
   Box,
-  Button,
   Card,
   CardContent,
   CardHeader,
@@ -9,15 +8,12 @@ import {
   useTheme,
   colors
 } from '@material-ui/core';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { useEffect, useState } from 'react'
 
 const AvgSignAmountChart = (props) => {
   
   const theme = useTheme();
   const { labels } = props;
-  const { avg_order_amount_data } = props;
   const { avg_sign_amount_data } = props;
   const { placeName } = props;
   const [labelsState, setLabelsState] = useState([])

@@ -1,19 +1,14 @@
 import {
   Avatar,
-  Button,
-  Box,
   Card,
   CardContent,
   Grid,
   Typography
 } from '@material-ui/core';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import MoneyIcon from '@material-ui/icons/Money';
 import { red } from '@material-ui/core/colors';
-import { useEffect, useState } from 'react'
 
 const OrderAmount = (props) => {
-  const {handleBudgetClick} = props
   const {avg_order_amount} = props
 
   

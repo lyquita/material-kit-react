@@ -1,22 +1,10 @@
 import { React, useEffect, useState } from 'react';
 import axios from 'axios';
 import {
-  Navigate,
-  Link,
-  BrowserRouter as Router,
-  Route,
   useNavigate
 } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Box, Container, Grid, Typography } from '@material-ui/core';
-import Budget from 'src/components/dashboard//Budget';
-import LatestOrders from 'src/components/dashboard//LatestOrders';
-import LatestProducts from 'src/components/dashboard//LatestProducts';
-import Sales from 'src/components/dashboard//Sales';
-import TasksProgress from 'src/components/dashboard//TasksProgress';
-import TotalCustomers from 'src/components/dashboard//TotalCustomers';
-import TotalProfit from 'src/components/dashboard//TotalProfit';
-import TrafficByDevice from 'src/components/dashboard//TrafficByDevice';
+import { Box, Container, Grid } from '@material-ui/core';
 import DashboardToolBar from 'src/components/dashboard/ToolBar';
 import { makeStyles } from '@material-ui/core';
 import OrderAmount from 'src/components/dashboard/OrderAmount';
@@ -27,8 +15,6 @@ import AvgOrderAmountChart from 'src/components/dashboard/AvgOrderAmountChart';
 import AvgSignAmountChart from 'src/components/dashboard/AvgSignAmountChart';
 import CostPerUserChart from 'src/components/dashboard/CostPerUserChart';
 import OccupyRateChart from 'src/components/dashboard/OccupyRateChart';
-import Login from 'src/pages/Login';
-import NotFound from 'src/pages/NotFound';
 
 const useStyles = makeStyles({
   filter: {
@@ -228,7 +214,6 @@ const Dashboard = () => {
 
   console.log('result state', result)
 
-  // console.log('update id', placeName)
 
   return (
     <>

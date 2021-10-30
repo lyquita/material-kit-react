@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Helmet } from 'react-helmet';
 import { Box, Container } from '@material-ui/core';
 import CustomerListResults from 'src/components/customer/CustomerListResults';

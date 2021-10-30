@@ -4,26 +4,12 @@ import {
   Card,
   CardContent,
   TextField,
-  InputAdornment,
-  SvgIcon,
   MenuItem,
   makeStyles,
   CardHeader,
   Divider
 } from '@material-ui/core';
-import { Search as SearchIcon } from 'react-feather';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-  DatePicker
-} from '@material-ui/pickers';
 import 'date-fns';
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
-import { useState, useEffect } from 'react';
-import { format } from 'date-fns';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const Locations = [
   {
@@ -76,26 +62,25 @@ const useStyles = makeStyles({
 // 将用户输入的值 放入state中
 
 const DashboardToolBar = (props) => {
-  const { handleChange } = props;
   const { set_place_name } = props;
   const { updateTarget } = props;
-  const [inputValue, setInputvalue] = useState('');
-  const [targetId, setTargetid] = useState('');
+  // const [inputValue, setInputvalue] = useState('');
+  // const [targetId, setTargetid] = useState('');
   const classes = useStyles();
 
-  const handleDateAfterChange = (date) => {
-    let formatDate = format(date, 'yyyy-MM-dd');
-    let targetId = 'coursedateAfter';
-    setInputvalue(formatDate);
-    setTargetid(targetId);
-  };
+  // const handleDateAfterChange = (date) => {
+  //   let formatDate = format(date, 'yyyy-MM-dd');
+  //   let targetId = 'coursedateAfter';
+  //   setInputvalue(formatDate);
+  //   setTargetid(targetId);
+  // };
 
-  const handleDateBeforeChange = (date) => {
-    let formatDate = format(date, 'yyyy-MM-dd');
-    let targetId = 'coursedateBefore';
-    setInputvalue(formatDate);
-    setTargetid(targetId);
-  };
+  // const handleDateBeforeChange = (date) => {
+  //   let formatDate = format(date, 'yyyy-MM-dd');
+  //   let targetId = 'coursedateBefore';
+  //   setInputvalue(formatDate);
+  //   setTargetid(targetId);
+  // };
 
   const handleOnChange =(e) =>{
     set_place_name(e.target.dataset.value)
