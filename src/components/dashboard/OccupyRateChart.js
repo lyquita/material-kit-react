@@ -26,7 +26,7 @@ const OccupyRateChart = (props) => {
   useEffect(()=>{
     setLabelsState(labels)
     setAvgOccupyRateState(avg_occupy_rate_data)
-  },[placeName, avgOccupyRateState])
+  },[placeName, labels, avg_occupy_rate_data])
 
 
   const data = {

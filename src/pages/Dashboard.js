@@ -91,9 +91,6 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    const fetchData = () => {
-      console.log('local store token', localStorage.getItem('token'))
-
       axios.interceptors.request.use(config=>{
         config.headers.common['Authorization']='Bearer ' + localStorage.getItem('token')
         return config
@@ -227,8 +224,6 @@ const Dashboard = () => {
       setAvgSignAmount(result.avg_signamount);
       setAvgCostPerUser(result.avg_costperuser);
       setAvgOccupyRate(result.avg_occupyrate);
-    };
-    fetchData();
   }, [placeName, result.id]);
 
   console.log('result state', result)
