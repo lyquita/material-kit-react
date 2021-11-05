@@ -7,7 +7,8 @@ import {
   InputAdornment,
   SvgIcon,
   MenuItem,
-  makeStyles
+  makeStyles,
+  Stack
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
 import {
@@ -20,7 +21,7 @@ import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import { useState } from 'react';
-import { format } from 'date-fns'
+import { format } from 'date-fns';
 
 const Locations = [
   {
@@ -61,58 +62,49 @@ const Locations = [
   }
 ];
 
-const useStyles = makeStyles({
-  filter: {
-    width: "30% !important"
-  }
-})
-
 // 将用户输入的值 放入state中
 
 const CustomerListToolbar = (props) => {
   const { handleChange } = props;
   const [inputValue, setInputvalue] = useState('');
   const [targetId, setTargetid] = useState('');
-  const classes = useStyles();
   function handleInput(e) {
-    console.log('child',e)
+    console.log('child', e);
 
-    switch(e.type){
-      case 'change' :
-        setInputvalue(e.target.value)
-        setTargetid(e.target.id)
-        console.log('e.change')
+    switch (e.type) {
+      case 'change':
+        setInputvalue(e.target.value);
+        setTargetid(e.target.id);
+        console.log('e.change');
         break;
       case 'click':
-        setInputvalue(e.target.value)
-        setTargetid(e.target.name)
+        setInputvalue(e.target.value);
+        setTargetid(e.target.name);
         break;
       default:
-        console.log('got error when handleInput')
+        console.log('got error when handleInput');
     }
-  
   }
-  const handleDateAfterChange =(date)=>{
-    let formatDate = format(date,'yyyy-MM-dd')
-    let targetId = 'coursedateAfter'
+  const handleDateAfterChange = (date) => {
+    let formatDate = format(date, 'yyyy-MM-dd');
+    let targetId = 'coursedateAfter';
     setInputvalue(formatDate);
     setTargetid(targetId);
-  }
+  };
 
-  const handleDateBeforeChange = (date) =>{
-    let formatDate = format(date,'yyyy-MM-dd')
-    let targetId = 'coursedateBefore'
-    setInputvalue(formatDate)
-    setTargetid(targetId)
-  }
+  const handleDateBeforeChange = (date) => {
+    let formatDate = format(date, 'yyyy-MM-dd');
+    let targetId = 'coursedateBefore';
+    setInputvalue(formatDate);
+    setTargetid(targetId);
+  };
 
- function handleResetClick (){
-  window.location.reload()
- }
+  function handleResetClick() {
+    window.location.reload();
+  }
 
   handleChange(inputValue, targetId);
 
-  
   return (
     <Box {...props}>
       <Box
@@ -120,17 +112,11 @@ const CustomerListToolbar = (props) => {
           display: 'flex',
           justifyContent: 'flex-end'
         }}
-      >
-        {/* <Button>Import</Button>
-        <Button sx={{ mx: 1 }}>Export</Button>
-        <Button color="primary" variant="contained">
-          Add Course
-        </Button> */}
-      </Box>
-      <Box sx={{ mt: 3}}>
+      ></Box>
+      <Box sx={{ mt: 3 }}>
         <Card>
           <CardContent>
-            <Box>
+            <Stack direction={{ xs: 'column', sm: 'column', md: 'row' }}>
               <TextField
                 fullWidth
                 InputProps={{
@@ -144,10 +130,8 @@ const CustomerListToolbar = (props) => {
                 }}
                 placeholder="Search coach name"
                 variant="outlined"
-                id='coachname'
+                id="coachname"
                 onChange={handleInput}
-                className={classes.filter}
-                // onChange = {handleChange('kyomo', 'coachname')}
               />
               <TextField
                 fullWidth
@@ -164,48 +148,47 @@ const CustomerListToolbar = (props) => {
                 variant="outlined"
                 id="coursename"
                 onChange={handleInput}
-                className={classes.filter}
-
               />
-              <TextField fullWidth select label="Select Location" onChange={handleInput} name="placename" className={classes.filter}>
+              <TextField
+                fullWidth
+                select
+                label="Select Location"
+                onChange={handleInput}
+                name="placename"
+              >
                 {Locations.map((option) => (
                   <MenuItem key={option.placeid} value={option.placename}>
                     {option.placename}
                   </MenuItem>
                 ))}
               </TextField>
-              <MuiPickersUtilsProvider utils={DateFnsUtils} className={classes.filter}>
-                <KeyboardDatePicker
-                  disableToolbar
-                  variant="inline"
-                  format="MM/dd/yyyy"
-                  margin="normal"
-                  id="coursedateAfter"
+            </Stack>
+            <Stack>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <DatePicker
                   label="Course Date After"
                   onChange={handleDateAfterChange}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date'
-                  }}
-                  value='coursedateAfter'
+                  renderInput={(params) => <TextField {...params} />}
+                  format="MM/dd/yyyy"
                 />
               </MuiPickersUtilsProvider>
-              <MuiPickersUtilsProvider utils={DateFnsUtils} className={classes.filter}>
-                <KeyboardDatePicker
-                  disableToolbar
-                  variant="inline"
-                  format="MM/dd/yyyy"
-                  margin="normal"
-                  id="coursedate"
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <DatePicker
                   label="Course Date Before"
                   onChange={handleDateBeforeChange}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date'
-                  }}
-                  value='coursedate'
+                  renderInput={(params) => <TextField {...params} />}
+                  format="MM/dd/yyyy"
+                  inputValue={inputValue}
                 />
               </MuiPickersUtilsProvider>
-            </Box>
-            <Button variant="contained" color="primary" onClick={handleResetClick}>Reset</Button>
+            </Stack>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleResetClick}
+            >
+              Reset
+            </Button>
           </CardContent>
         </Card>
       </Box>

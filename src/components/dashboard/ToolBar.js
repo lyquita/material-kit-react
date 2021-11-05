@@ -64,23 +64,7 @@ const useStyles = makeStyles({
 const DashboardToolBar = (props) => {
   const { set_place_name } = props;
   const { updateTarget } = props;
-  // const [inputValue, setInputvalue] = useState('');
-  // const [targetId, setTargetid] = useState('');
   const classes = useStyles();
-
-  // const handleDateAfterChange = (date) => {
-  //   let formatDate = format(date, 'yyyy-MM-dd');
-  //   let targetId = 'coursedateAfter';
-  //   setInputvalue(formatDate);
-  //   setTargetid(targetId);
-  // };
-
-  // const handleDateBeforeChange = (date) => {
-  //   let formatDate = format(date, 'yyyy-MM-dd');
-  //   let targetId = 'coursedateBefore';
-  //   setInputvalue(formatDate);
-  //   setTargetid(targetId);
-  // };
 
   const handleOnChange =(e) =>{
     set_place_name(e.target.dataset.value)

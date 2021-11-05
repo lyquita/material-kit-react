@@ -5,8 +5,11 @@ import CustomerListResults from 'src/components/customer/CustomerListResults';
 import CustomerListToolbar from 'src/components/customer/CustomerListToolbar';
 import { React, useEffect, useState } from 'react';
 import axios from 'axios';
+import { func } from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 function CustomerList() {
+  const navigate = useNavigate();
   const [customers, setCustomers] = useState([]);
   const [page, setPage] = useState(0);
   const [coachname, setCoachname] = useState('');
@@ -35,12 +38,30 @@ function CustomerList() {
     page_size: pagesize
   };
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios(`/course/`, { params });
-      setCustomers(res);
-      console.log('params', params)
-    };
-    fetchData();
+    axios.interceptors.request.use(config=>{
+      config.headers.common['Authorization']='Bearer ' + localStorage.getItem('token')
+      return config
+    }, err=>{
+      console.log('err', err)
+    })
+
+    axios(`/course/`, {params})
+    .then((res)=>{
+      setCustomers(res)
+    })
+    .catch(function (error) {
+      if (error.response) {
+        if(401 === error.response.status){
+          navigate('/login', {replace:true})
+        }
+      }
+    })
+    // const fetchData = async () => {
+    //   const res = await axios(`/course/`, { params });
+    //   setCustomers(res);
+    //   console.log('params', params)
+    // };
+    // fetchData();
   }, [page,coachname,coursename,placename,coursedateAfter,coursedateBefore,pagesize]);
 
   // toolbar handle

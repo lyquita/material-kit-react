@@ -72,10 +72,10 @@ const Login = () => {
             justifyContent="center"
             alignItems="center"
           >
-            <Grid item>
+            <Grid item paddingLeft={0}>
               <Typography variant={'h1'}>Login</Typography>
             </Grid>
-            <Grid item></Grid>
+            <Grid item>
             <form onSubmit={handleSubmit}>
               <Stack spacing={2}>
                   <TextField
@@ -91,6 +91,7 @@ const Login = () => {
                   <Button type="submit">Login </Button>
               </Stack>
             </form>
+          </Grid>
           </Grid>
         </Container>
       </Box>

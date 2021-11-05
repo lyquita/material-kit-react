@@ -17,9 +17,6 @@ import CostPerUserChart from 'src/components/dashboard/CostPerUserChart';
 import OccupyRateChart from 'src/components/dashboard/OccupyRateChart';
 
 const useStyles = makeStyles({
-  filter: {
-    width: '30% !important'
-  },
   itemContainer: {
     marginBottom: 30
   }
@@ -228,8 +225,8 @@ const Dashboard = () => {
         }}
       >
         <Container maxWidth={false}>
-          <Grid container spacing={3}>
-            <Grid item sm={12}>
+          <Grid container spacing={{xm:1,sm:3}} >
+            <Grid item sm={12} width={'100%'}>
               <DashboardToolBar
                 set_place_name={setPlaceName}
                 updateTarget={updateTargetId}
@@ -237,25 +234,25 @@ const Dashboard = () => {
             </Grid>
             <Grid item sm={12}>
               <Grid container>
-                <Grid items sm={6}>
+                <Grid items sm={6} width={'inherit'}>
                   <OrderAmount
                     handleBudgetClick={handleBudgetClick}
                     avg_order_amount={avgOrderAmount}
                   />
                 </Grid>
-                <Grid items sm={6}>
+                <Grid items sm={6} width={'inherit'}>
                   <SignAmount
                     handleBudgetClick={handleBudgetClick}
                     avg_sign_amount={avgSignAmount}
                   />
                 </Grid>
-                <Grid items sm={6}>
+                <Grid items sm={6} width={'inherit'}>
                   <CostPerUser
                     handleBudgetClick={handleBudgetClick}
                     avg_cost_per_user={avgCostPerUser}
                   />
                 </Grid>
-                <Grid items sm={6}>
+                <Grid items sm={6} width={'inherit'}>
                   <OccupyRate
                     handleBudgetClick={handleBudgetClick}
                     avg_occupy_rate={avgOccupyRate}
@@ -265,28 +262,28 @@ const Dashboard = () => {
             </Grid>
             <Grid item>
               <Grid container spacing={3}>
-                <Grid item sm={6}>
+                <Grid item sm={6} width={'inherit'}>
                   <AvgOrderAmountChart
                     labels={labelsState}
                     avg_order_amount_data={avgOrderAmountData}
                     placeName={placeName}
                   />
                 </Grid>
-                <Grid item sm={6}>
+                <Grid item sm={6} width={'inherit'}>
                   <AvgSignAmountChart
                     labels={labelsState}
                     avg_sign_amount_data={avgSignAmountData}
                     placeName={placeName}
                   />
                 </Grid>
-                <Grid item sm={6}>
+                <Grid item sm={6} width={'inherit'}>
                   <CostPerUserChart
                     labels={labelsState}
                     avg_cost_per_user_data={costPerUserData}
                     placeName={placeName}
                   />
                 </Grid>
-                <Grid item sm={6}>
+                <Grid item sm={6} width={'inherit'}>
                   <OccupyRateChart
                     labels={labelsState}
                     avg_occupy_rate_data={avgOccupyRateData}
